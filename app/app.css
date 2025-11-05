@@ -141,3 +141,8 @@ section.section-spacing {
 .field-input-focus {
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20;
 }
+
+/* Book Page Flip Effect */
+.perspective-1000 {
+  perspective: 1000px;
+}
