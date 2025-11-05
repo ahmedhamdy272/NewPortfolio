@@ -1,9 +1,13 @@
-import { useState } from "react";
-import ProjectDetails from "./ProjectDetails";
+
+import { useState, lazy, Suspense } from "react";
+
+// Lazy load ProjectDetails modal - only loads when user clicks "Read More"
+const ProjectDetails = lazy(() => import("./ProjectDetails"));
 
 interface Tag {
   id: string | number;
   name: string;
+  path: string;
 }
 
 interface ProjectProps {
@@ -46,20 +50,30 @@ const Project = ({
           className="flex items-center gap-1 cursor-pointer hover-animation"
         >
           Read More
-          <img src="assets/arrow-right.svg" className="w-5" />
+          <img src="assets/arrow-right.svg" className="w-5" alt="Arrow right" loading="eager" />
         </button>
       </div>
       <div className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent h-[1px] w-full" />
       {isHidden && (
-        <ProjectDetails
-          title={title}
-          description={description}
-          subDescription={subDescription}
-          image={image}
-          tags={tags}
-          href={href}
-          closeModal={() => setIsHidden(false)}
-        />
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+              <div className="animate-pulse">
+                <div className="w-64 h-64 bg-neutral-800 rounded-lg"></div>
+              </div>
+            </div>
+          }
+        >
+          <ProjectDetails
+            title={title}
+            description={description}
+            subDescription={subDescription}
+            image={image}
+            tags={tags}
+            href={href}
+            closeModal={() => setIsHidden(false)}
+          />
+        </Suspense>
       )}
     </>
   );
