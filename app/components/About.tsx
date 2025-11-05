@@ -1,8 +1,10 @@
-import { useRef } from "react";
+import { useRef, lazy, Suspense } from "react";
 import Card from "../components/Card";
-import { Globe } from "../components/Globe";
 import CopyEmailButton from "../components/CopyEmailButton";
-import { Frameworks } from "../components/FrameWorks";
+
+// Lazy load heavy components
+const Globe = lazy(() => import("../components/Globe").then(module => ({ default: module.Globe })));
+const Frameworks = lazy(() => import("../components/FrameWorks").then(module => ({ default: module.Frameworks })));
 
 const About = () => {
   const grid2Container = useRef<HTMLDivElement>(null);
@@ -15,6 +17,9 @@ const About = () => {
           <img
             src="assets/coding-pov.png"
             className="absolute scale-[1.75] -right-[5rem] -top-[1rem] md:scale-[3] md:left-50 md:inset-y-10 lg:scale-[2.5]"
+            alt="Coding perspective"
+            loading="lazy"
+            decoding="async"
           />
           <div className="z-10">
             <p className="headtext">Hi, I'm Ahmed Hamdy</p>
@@ -85,7 +90,9 @@ const About = () => {
             </p>
           </div>
           <figure className="absolute left-[30%] top-[10%]">
-            <Globe className="w-full h-full" />
+            <Suspense fallback={<div className="w-full h-full animate-pulse bg-neutral-800 rounded-full"></div>}>
+              <Globe className="w-full h-full" />
+            </Suspense>
           </figure>
         </div>
         {/* Grid 4 */}
@@ -107,7 +114,9 @@ const About = () => {
             </p>
           </div>
           <div className="absolute inset-y-0 md:inset-y-9 w-full h-full start-[50%] md:scale-125">
-            <Frameworks />
+            <Suspense fallback={<div className="w-full h-full animate-pulse bg-neutral-800 rounded-lg"></div>}>
+              <Frameworks />
+            </Suspense>
           </div>
         </div>
       </div>
