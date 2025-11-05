@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import emailjs from "@emailjs/browser";
-import Alert from "../components/Alert";
-import { Particles } from "../components/Particles";
+
+// Lazy load components and libraries
+const Alert = lazy(() => import("../components/Alert"));
+const Particles = lazy(() => import("../components/Particles").then(module => ({ default: module.Particles })));
 
 interface FormData {
   name: string;
@@ -41,6 +42,8 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
+      // Dynamically import emailjs only when form is submitted
+      const emailjs = (await import("@emailjs/browser")).default;
       console.log("From submitted:", formData);
       await emailjs.send(
         "service_buix6j7",
@@ -66,14 +69,20 @@ const Contact = () => {
 
   return (
     <section className="relative flex items-center" id="contact">
-      <Particles
-        className="absolute inset-0 -z-50"
-        quantity={100}
-        ease={80}
-        color={"#ffffff"}
-        refresh
-      />
-      {showAlert && <Alert type={alertType} text={alertMessage} />}
+      <Suspense fallback={null}>
+        <Particles
+          className="absolute inset-0 -z-50"
+          quantity={100}
+          ease={80}
+          color={"#ffffff"}
+          refresh
+        />
+      </Suspense>
+      {showAlert && (
+        <Suspense fallback={null}>
+          <Alert type={alertType} text={alertMessage} />
+        </Suspense>
+      )}
       <div className="flex flex-col items-center justify-center max-w-md p-5 mx-auto border border-white/10 rounded-2xl bg-primary">
         <div className="flex flex-col items-start w-full gap-5 mb-10">
           <h2 className="text-heading">Let's Talk</h2>
@@ -144,3 +153,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
