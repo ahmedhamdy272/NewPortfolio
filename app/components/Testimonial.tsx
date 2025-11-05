@@ -24,8 +24,10 @@ const ReviewCard = ({ img, name, username, body }: ReviewCardProps) => {
           className="rounded-full bg-white/10"
           width="32"
           height="32"
-          alt=""
+          alt={`${name} avatar`}
           src={img}
+          loading="lazy"
+          decoding="async"
         />
         <div className="flex flex-col">
           <figcaption className="text-sm font-medium text-white">
@@ -60,3 +62,4 @@ export default function Testimonial() {
     </div>
   );
 }
+
