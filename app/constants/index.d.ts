@@ -10,14 +10,14 @@ export const myProjects = [
       "Designed a responsive frontend with Tailwind CSS, enhancing user experience.",
       "Added payment systems, localization, and product filtering for functionality improvements.",
     ],
-    href: "",
+    href: "https://ahmedhamdy272.github.io/Nike/",
     logo: "",
-    image: "/assets/projects/accessories.jpg",
+    image: "/assets/projects/sceenshot.jpeg",
     tags: [
       {
         id: 1,
-        name: "C#",
-        path: "/assets/logos/csharp.svg",
+        name: "React",
+        path: "/assets/logos/react.svg",
       },
       {
         id: 2,
@@ -26,8 +26,8 @@ export const myProjects = [
       },
       {
         id: 3,
-        name: "Ef Core",
-        path: "/assets/logos/efcore.png",
+        name: "Typescript",
+        path: "/assets/logos/typescript.webp",
       },
       {
         id: 4,
