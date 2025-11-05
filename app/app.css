@@ -55,6 +55,11 @@ body {
   overflow-x: hidden;
 }
 
+/* Offset in-page anchor scrolling to account for fixed navbar height */
+section.section-spacing {
+  scroll-margin-top: 80px;
+}
+
 .c-space {
   @apply sm:px-10 px-5 lg:px-15;
 }
