@@ -12,7 +12,7 @@ export const myProjects = [
     ],
     href: "https://ahmedhamdy272.github.io/Nike/",
     logo: "",
-    image: "/assets/projects/sceenshot.jpeg",
+    image: "/assets/projects/screenshot.jpeg",
     tags: [
       {
         id: 1,
