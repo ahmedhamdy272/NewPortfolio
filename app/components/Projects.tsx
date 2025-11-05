@@ -68,8 +68,8 @@ const Projects = () => {
       <div className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent mt-12 h-[1px] w-full" />
       
       {/* Book Page Container */}
-      <div className="flex justify-center items-center my-16 min-h-[400px] perspective-1000">
-        <div className="relative w-full max-w-5xl">
+      <div className="flex justify-center items-center my-16 min-h-[600px] perspective-1000">
+        <div className="relative w-full max-w-6xl mx-auto">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={currentIndex}
@@ -88,25 +88,36 @@ const Projects = () => {
             >
               {/* Book Page Wrapper with paper effect */}
               <div
-                className="relative w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 rounded-lg shadow-2xl border border-neutral-700 overflow-hidden"
+                className="relative w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 rounded-lg shadow-2xl overflow-hidden"
                 style={{
                   transformStyle: "preserve-3d",
-                  boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1)",
+                  boxShadow: "0 30px 80px rgba(0, 0, 0, 0.6), inset 0 0 100px rgba(255, 255, 255, 0.02), inset 0 0 0 1px rgba(255, 255, 255, 0.1)",
+                  minHeight: "600px",
                 }}
               >
-                {/* Paper texture effect */}
+                {/* Paper texture effect - more prominent */}
                 <div
-                  className="absolute inset-0 rounded-lg opacity-10 pointer-events-none"
+                  className="absolute inset-0 rounded-lg opacity-15 pointer-events-none"
                   style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='paper' x='0' y='0' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='50' cy='50' r='0.5' fill='%23fff'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23paper)'/%3E%3C/svg%3E")`,
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='paper' x='0' y='0' width='200' height='200' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='100' cy='100' r='1' fill='%23ffffff' opacity='0.1'/%3E%3Ccircle cx='50' cy='50' r='0.5' fill='%23ffffff' opacity='0.05'/%3E%3Ccircle cx='150' cy='150' r='0.5' fill='%23ffffff' opacity='0.05'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='200' height='200' fill='url(%23paper)'/%3E%3C/svg%3E")`,
                   }}
                 />
                 
-                {/* Book Spine Shadow */}
-                <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-r from-black/50 to-transparent rounded-l-lg pointer-events-none" />
+                {/* Book binding/crease line on the left - more prominent */}
+                <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-black/60 via-neutral-900/40 via-neutral-800/20 to-transparent pointer-events-none rounded-l-lg" />
                 
-                {/* Project Content - keeping all original styles */}
-                <div className="relative z-10 px-8 md:px-12">
+                {/* Page fold shadow effect - crease line */}
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-r from-black/40 via-black/20 to-transparent pointer-events-none" />
+                
+                {/* Subtle page edge shadow */}
+                <div className="absolute right-0 top-0 bottom-0 w-2 bg-gradient-to-l from-black/10 to-transparent pointer-events-none rounded-r-lg" />
+                
+                {/* Top and bottom shadows for depth */}
+                <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-black/5 to-transparent pointer-events-none rounded-t-lg" />
+                <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-black/5 to-transparent pointer-events-none rounded-b-lg" />
+                
+                {/* Project Content - keeping all original styles with book-like padding */}
+                <div className="relative z-10 px-12 md:px-16 py-10 md:py-12">
                   <Project {...currentProject} setPreview={setPreview} />
                 </div>
               </div>
