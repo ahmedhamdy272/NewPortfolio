@@ -1,19 +1,25 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import HeroText from "../components/HeroText";
-import ParallaxBackground from "../components/ParallaxBackground";
 import { Astronaut } from "../components/Astronaut";
 import { Float } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
 import { easing } from "maath";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import Loader from "../components/Loader";
+
+// Lazy load components
+const HeroText = lazy(() => import("../components/HeroText"));
+const ParallaxBackground = lazy(() => import("../components/ParallaxBackground"));
 
 const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 853 });
   return (
     <section className="flex items-start justify-center min-h-screen overflow-hidden md:items-start md:justify-start c-space">
-      <HeroText />
-      <ParallaxBackground />
+      <Suspense fallback={<div className="animate-pulse"><div className="h-20 w-64 bg-neutral-800 rounded"></div></div>}>
+        <HeroText />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ParallaxBackground />
+      </Suspense>
       <figure
         className="absolute inset-0"
         style={{ width: "100vw", height: "100vh" }}
